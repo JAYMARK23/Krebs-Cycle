@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>KREBS CYCLE</title>
+    <!-- Improved viewport meta tag for mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="icon.png" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+                
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #070707;
+            touch-action: manipulation;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 15px 0;
+        }
+
+        .navbar-brand h1 {
+            font-weight: 800;
+            color: #86B817 !important;
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .nav-item.nav-link {
+            font-weight: 500;
+            padding: 8px 15px;
+            color: #333;
+        }
+
+        .nav-item.nav-link.active {
+            color: #86B817;
+            font-weight: 600;
+        }
+
+        .nav-item.nav-link:hover {
+            color: #86B817;
+        }
+
+        /* Game Container */
+        .game-main-container {
+            padding: 40px 0;
+            min-height: calc(100vh - 120px);
+        }
+
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        #grid {
+            display: grid;
+            grid-template-columns: repeat(15, minmax(20px, 30px));
+            grid-template-rows: repeat(15, minmax(20px, 30px));
+            gap: 2px;
+            justify-content: center;
+            overflow-x: auto;
+            margin: 0 auto;
+            touch-action: none;
+        }
+
+        .cell {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #e0e0e0;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            aspect-ratio: 1;
+            transition: all 0.2s;
+            min-width: 20px;
+            min-height: 20px;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .cell.selected {
+            background-color: #a0d8ef;
+            transform: scale(1.05);
+        }
+
+        .cell.found {
+            color: white;
+            font-weight: bold;
+        }
+
+        #wordsToFind {
+            width: 100%;
+            padding: 15px;
+            border-bottom: 2px solid #eee;
+        }
+
+        #wordsToFind h3 {
+            margin-top: 0;
+            text-align: center;
+            color: #86B817;
+            font-weight: 600;
+        }
+
+        #wordsToFind ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        #wordsToFind li {
+            margin: 5px 0;
+            font-size: 16px;
+            text-decoration: line-through;
+            color: #888;
+            padding: 8px 12px;
+            border-radius: 5px;
+            background-color: #f5f5f5;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        #wordsToFind li:hover {
+            background-color: #e0e0e0;
+        }
+
+        #wordsToFind li.found {
+            color: #333;
+            text-decoration: none;
+            background-color: #e8f5e9;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        #wordDescription {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #86B817;
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #wordDescription h4 {
+            color: #86B817;
+            margin-top: 0;
+            font-size: 1.2rem;
+        }
+
+        #wordDescription p {
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
+
+        #message {
+            font-size: 18px;
+            color: #333;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: 500;
+            min-height: 24px;
+        }
+
+        .game-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .game-btn {
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s;
+            min-width: 100px;
+        }
+
+        .exit-btn {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .exit-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        .restart-btn {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        .restart-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .hint-btn {
+            background-color: #FFC107;
+            color: white;
+        }
+
+        .hint-btn:hover {
+            background-color: #e0a800;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .stat-box {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #86B817;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1050;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            max-width: 90%;
+            width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+            color: #86B817;
+            font-weight: 700;
+        }
+
+        .modal-content p {
+            margin-bottom: 20px;
+        }
+
+        .modal-content button {
+            padding: 10px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #86B817;
+            color: white;
+            border-radius: 5px;
+            margin: 5px;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+
+        .modal-content button:hover {
+            background-color: #3e8e41;
+        }
+
+        .modal-content button.exit {
+            background-color: #f44336;
+        }
+
+        .modal-content button.exit:hover {
+            background-color: #d32f2f;
+        }
+
+        /* Welcome modal specific styles */
+        #welcomeModal .modal-content {
+            text-align: left;
+        }
+
+        #welcomeModal h3 {
+            color: #86B817;
+            margin-top: 15px;
+        }
+
+        #welcomeModal ul {
+            text-align: left;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        #welcomeModal ul li {
+            margin-bottom: 8px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #000000;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #a5d6a7;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        /* Loading spinner */
+        .loader {
+            display: none;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #86B817;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive adjustments */
+        @media (min-width: 992px) {
+            .game-container {
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-items: flex-start;
+            }
+            #wordsToFind {
+                width: 100%;
+                border-right: none;
+                border-bottom: 2px solid #eee;
+                position: static;
+            }
+            .game-area {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-brand h1 {
+                font-size: 1.5rem;
+            }
+            .cell {
+                font-size: 14px;
+            }
+            #wordsToFind li {
+                font-size: 14px;
+                padding: 6px 10px;
+            }
+            .stats-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .game-container {
+                padding: 20px;
+            }
+            #grid {
+                grid-template-columns: repeat(15, minmax(16px, 1fr));
+                grid-template-rows: repeat(15, minmax(16px, 1fr));
+            }
+            .cell {
+                font-size: 10px;
+                min-width: 16px;
+                min-height: 16px;
+            }
+            .navbar-brand h1 {
+                font-size: 1.3rem;
+            }
+            .game-controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .modal-content {
+                width: 95%;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a href="index.html" class="navbar-brand p-0">
+                <h1 class="m-0">KREBS CYCLE</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="index.html" class="nav-item nav-link active">Home</a>
+                    <a href="learnmore.html" class="nav-item nav-link">Learn More</a>
+                    <a href="post.html" class="nav-item nav-link">Post-Test</a>
+                    <a href="researchers.html" class="nav-item nav-link">Researchers</a>
+                    <a href="faq.html" class="nav-item nav-link">Games</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <hr>
+
+    <!-- Main Content -->
+    <div class="game-main-container">
+        <!-- Loading Spinner -->
+        <div class="loader" id="loader"></div>
+
+        <!-- Welcome Modal -->
+        <div id="welcomeModal" class="modal">
+            <div class="modal-content">
+                <h2>Welcome to the Krebs Cycle Word Search!</h2>
+                <p>Find all the words related to the Krebs Cycle (Citric Acid Cycle) in the grid.</p>
+                <h3>How to Play:</h3>
+                <ul>
+                    <li>Click and drag to select letters (or tap and swipe on mobile)</li>
+                    <li>Words can be in any direction (horizontal, vertical, or diagonal)</li>
+                    <li>Release to check if you've found a word</li>
+                    <li>Found words will be highlighted and marked in the list</li>
+                    <li>Click on any found word in the list to see its description</li>
+                </ul>
+                <p>Find all the words to complete the game!</p>
+                <button onclick="startGame()">Start Game</button>
+            </div>
+        </div>
+
+        <!-- Completion Modal -->
+        <div id="completionModal" class="modal">
+            <div class="modal-content">
+                <h2>Congratulations!</h2>
+                <p>You've found all the words in the Krebs Cycle!</p>
+                <div id="completionStats">
+                    <p>Words found: <span id="foundCountModal">0</span>/<span id="totalWordsModal">0</span></p>
+                    <p>Time taken: <span id="completionTime">0</span> seconds</p>
+                </div>
+                <button onclick="restartGame()">Play Again</button>
+                <button class="exit" onclick="exitGame()">Exit Game</button>
+            </div>
+        </div>
+
+        <!-- Game Container -->
+        <div class="game-container" style="display: none;">
+            <div class="stats-container">
+                <div class="stat-box">
+                    <div class="stat-value" id="foundCount">0</div>
+                    <div class="stat-label">Found</div>
+                </div>
+            </div>
+            
+            <div id="wordsToFind">
+                <h3>Words to Find:</h3>
+                <ul id="wordsList"></ul>
+            </div>
+            <div class="game-area">
+                <div id="grid"></div>
+                <p id="message"></p>
+            </div>
+            <div id="wordDescription">
+                <h4 id="descriptionTitle"></h4>
+                <p id="descriptionContent"></p>
+            </div>
+            <div class="game-controls">
+                <button class="game-btn exit-btn" onclick="exitGame()">Exit Game</button>
+                <button class="game-btn hint-btn" onclick="showHint()" id="hintBtn">Get Hint (3 left)</button>
+                <button class="game-btn restart-btn" onclick="restartGame()">Restart Game</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="copyright text-center">
+                &copy; 2025 BiPSU BS-EDUCATION
+                <br>
+                Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const gridSize = 15;
+        const grid = document.getElementById('grid');
+        const wordsList = document.getElementById('wordsList');
+        const message = document.getElementById('message');
+        const completionModal = document.getElementById('completionModal');
+        const welcomeModal = document.getElementById('welcomeModal');
+        const gameContainer = document.querySelector('.game-container');
+        const wordDescription = document.getElementById('wordDescription');
+        const descriptionTitle = document.getElementById('descriptionTitle');
+        const descriptionContent = document.getElementById('descriptionContent');
+        const foundCountElement = document.getElementById('foundCount');
+        const totalWordsElement = document.getElementById('totalWords');
+        const completionTimeElement = document.getElementById('completionTime');
+        const completionStatsElement = document.getElementById('completionStats');
+        const hintButton = document.getElementById('hintBtn');
+        const loader = document.getElementById('loader');
+
+        // Words to find with their descriptions
+        const words = [
+            { 
+                word: "KREBSCYCLE", 
+                description: "A series of chemical reactions in the mitochondria that generate energy through the oxidation of acetyl-CoA, producing NADH, FADH₂, and ATP. Also called the Citric Acid Cycle (TCA cycle)." 
+            },
+            { 
+                word: "CITRATESYNTHASE", 
+                description: "An enzyme that catalyzes the first step of the Krebs cycle, combining acetyl-CoA and oxaloacetate to form citrate." 
+            },
+            { 
+                word: "ACONITASE", 
+                description: "An enzyme that converts citrate into isocitrate by rearranging its molecular structure." 
+            },
+            { 
+                word: "AKETOGLUTARATE", 
+                description: "A key intermediate in the Krebs cycle, formed from isocitrate through oxidative decarboxylation." 
+            },
+            { 
+                word: "SUCCINYLCOA", 
+                description: "An intermediate in the Krebs cycle formed from alpha-ketoglutarate, which is converted to succinate while generating GTP (equivalent to ATP)." 
+            },
+            { 
+                word: "PYRUVATE", 
+                description: "A high-energy intermediate in the Krebs cycle, produced from α-ketoglutarate, which later helps generate ATP or GTP." 
+            },
+            { 
+                word: "SUCCINATE", 
+                description: "A molecule formed from succinyl-CoA, which is then converted to fumarate in the Krebs cycle." 
+            },
+            { 
+                word: "FUMERATE", 
+                description: "A compound produced from succinate and later converted into malate in the Krebs cycle." 
+            },
+            { 
+                word: "MALATE", 
+                description: "An intermediate that is converted into oxaloacetate, the final step of the Krebs cycle, regenerating the cycle." 
+            },
+            { 
+                word: "OXALOACETATE", 
+                description: "A four-carbon molecule that combines with acetyl-CoA to restart the Krebs cycle." 
+            },
+            { 
+                word: "MITOCHONDRIA", 
+                description: "The organelles in eukaryotic cells where the Krebs cycle takes place, often referred to as the powerhouse of the cell." 
+            },
+            { 
+                word: "NADH", 
+                description: "A high-energy electron carrier molecule produced in the Krebs cycle, used in the electron transport chain to generate ATP." 
+            },
+            { 
+                word: "FADH2", 
+                description: "Another electron carrier molecule, similar to NADH, that donates electrons to the electron transport chain for ATP production." 
+            },
+            { 
+                word: "HANSADOLFKREBS", 
+                description: "The scientist who discovered the Krebs cycle in 1937, for which he won the Nobel Prize in Physiology or Medicine in 1953." 
+            },
+            { 
+                word: "CITRICACID", 
+                description: "The first compound formed in the Krebs cycle from acetyl-CoA and oxaloacetate, giving the cycle its alternative name, the Tricarboxylic Acid (TCA) Cycle." 
+            },
+            { 
+                word: "ISOCITRATE", 
+                description: "A six-carbon intermediate in the Krebs cycle, formed from citrate and later converted into α-ketoglutarate." 
+            }
+        ];
+        
+        let selectedCells = [];
+        let isMouseDown = false;
+        let foundWords = [];
+        const wordColors = {}; // Store colors for each word
+        let startTime;
+        let hintsLeft = 3;
+        let wordPositions = {}; // Store positions of words for hints
+
+        // Color palette for word highlighting
+        const colorPalette = [
+            '#86B817', '#3e8e41', '#2196F3', '#3F51B5', 
+            '#9C27B0', '#E91E63', '#FF5722', '#009688',
+            '#795548', '#607D8B', '#4CAF50', '#FFC107',
+            '#FF9800', '#8BC34A', '#00BCD4', '#673AB7'
+        ];
+
+        // Show welcome modal when page loads
+        window.onload = function() {
+            welcomeModal.style.display = 'flex';
+            totalWordsElement.textContent = words.length;
+        };
+
+        // Start the game
+        function startGame() {
+            loader.style.display = 'block';
+            welcomeModal.style.display = 'none';
+            
+            setTimeout(() => {
+                gameContainer.style.display = 'flex';
+                generateGrid();
+                updateWordsList();
+                hintsLeft = 3;
+                updateHintButton();
+                startTime = new Date();
+                loader.style.display = 'none';
+            }, 500);
+        }
+
+        // Generate the grid
+        function generateGrid() {
+            grid.innerHTML = ''; // Clear any existing grid
+            
+            // Initialize empty grid
+            for (let i = 0; i < gridSize; i++) {
+                for (let j = 0; j < gridSize; j++) {
+                    const cell = document.createElement('div');
+                    cell.classList.add('cell');
+                    cell.dataset.row = i;
+                    cell.dataset.col = j;
+                    cell.textContent = ''; // Start with empty cells
+                    
+                    // Add enhanced touch events
+                    cell.addEventListener('mousedown', () => handleMouseDown(cell));
+                    cell.addEventListener('mouseenter', () => handleMouseEnter(cell));
+                    cell.addEventListener('mouseup', () => handleMouseUp());
+                    
+                    // Touch events with passive:false to prevent scrolling
+                    cell.addEventListener('touchstart', (e) => {
+                        e.preventDefault();
+                        handleMouseDown(cell);
+                        isMouseDown = true;
+                    }, { passive: false });
+                    
+                    cell.addEventListener('touchmove', (e) => {
+                        e.preventDefault();
+                        const touch = e.touches[0];
+                        const element = document.elementFromPoint(touch.clientX, touch.clientY);
+                        if (element && element.classList.contains('cell')) {
+                            handleMouseEnter(element);
+                        }
+                    }, { passive: false });
+                    
+                    grid.appendChild(cell);
+                }
+            }
+            
+            placeWordsInGrid();
+            fillRemainingCells();
+        }
+
+        // Place words in the grid
+        function placeWordsInGrid() {
+            wordPositions = {}; // Reset word positions
+            
+            words.forEach((wordObj, index) => {
+                const word = wordObj.word;
+                let placed = false;
+                let attempts = 0;
+                const maxAttempts = 100;
+                
+                // Assign a color from the palette
+                wordColors[word] = colorPalette[index % colorPalette.length];
+                
+                while (!placed && attempts < maxAttempts) {
+                    attempts++;
+                    
+                    // Randomly choose direction (0: horizontal, 1: vertical, 2: diagonal down-right, 3: diagonal up-right)
+                    const direction = Math.floor(Math.random() * 4);
+                    let row, col;
+                    
+                    // Calculate maximum possible starting position based on direction
+                    if (direction === 0) { // Horizontal
+                        row = Math.floor(Math.random() * gridSize);
+                        col = Math.floor(Math.random() * (gridSize - word.length));
+                    } else if (direction === 1) { // Vertical
+                        col = Math.floor(Math.random() * gridSize);
+                        row = Math.floor(Math.random() * (gridSize - word.length));
+                    } else { // Diagonal
+                        row = Math.floor(Math.random() * (gridSize - word.length));
+                        col = Math.floor(Math.random() * (gridSize - word.length));
+                    }
+                    
+                    if (canPlaceWord(word, row, col, direction)) {
+                        const positions = [];
+                        for (let i = 0; i < word.length; i++) {
+                            let cellIndex;
+                            if (direction === 0) { // Horizontal
+                                cellIndex = row * gridSize + col + i;
+                            } else if (direction === 1) { // Vertical
+                                cellIndex = (row + i) * gridSize + col;
+                            } else if (direction === 2) { // Diagonal down-right
+                                cellIndex = (row + i) * gridSize + (col + i);
+                            } else { // Diagonal up-right
+                                cellIndex = (row - i) * gridSize + (col + i);
+                            }
+                            
+                            const cell = grid.children[cellIndex];
+                            cell.textContent = word[i];
+                            positions.push(cellIndex);
+                        }
+                        
+                        wordPositions[word] = {
+                            direction: direction,
+                            startRow: row,
+                            startCol: col,
+                            cellIndices: positions
+                        };
+                        
+                        placed = true;
+                    }
+                }
+                
+                if (!placed) {
+                    console.warn(`Could not place word: ${word}`);
+                }
+            });
+        }
+
+        // Check if a word can be placed at the given position
+        function canPlaceWord(word, row, col, direction) {
+            for (let i = 0; i < word.length; i++) {
+                let cellIndex;
+                if (direction === 0) { // Horizontal
+                    // Check bounds
+                    if (col + i >= gridSize) return false;
+                    cellIndex = row * gridSize + col + i;
+                } else if (direction === 1) { // Vertical
+                    // Check bounds
+                    if (row + i >= gridSize) return false;
+                    cellIndex = (row + i) * gridSize + col;
+                } else if (direction === 2) { // Diagonal down-right
+                    // Check bounds
+                    if (row + i >= gridSize || col + i >= gridSize) return false;
+                    cellIndex = (row + i) * gridSize + (col + i);
+                } else { // Diagonal up-right
+                    // Check bounds
+                    if (row - i < 0 || col + i >= gridSize) return false;
+                    cellIndex = (row - i) * gridSize + (col + i);
+                }
+                
+                const cell = grid.children[cellIndex];
+                if (cell.textContent !== '' && cell.textContent !== word[i]) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Fill remaining cells with random letters
+        function fillRemainingCells() {
+            const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            for (let i = 0; i < gridSize; i++) {
+                for (let j = 0; j < gridSize; j++) {
+                    const cell = grid.children[i * gridSize + j];
+                    if (cell.textContent === '') {
+                        cell.textContent = letters[Math.floor(Math.random() * letters.length)];
+                    }
+                }
+            }
+        }
+
+        // Handle mouse down event
+        function handleMouseDown(cell) {
+            isMouseDown = true;
+            selectedCells = [cell];
+            cell.classList.add('selected');
+        }
+
+        // Handle mouse enter event
+        function handleMouseEnter(cell) {
+            if (isMouseDown && !selectedCells.includes(cell)) {
+                // Only allow selection in straight lines (horizontal, vertical, or diagonal)
+                if (selectedCells.length === 1) {
+                    // First selection - any direction is fine
+                    selectedCells.push(cell);
+                    cell.classList.add('selected');
+                } else {
+                    // Check if new cell continues in same direction as previous selections
+                    const firstCell = selectedCells[0];
+                    const lastCell = selectedCells[selectedCells.length - 1];
+                    const newDirection = getDirection(lastCell, cell);
+                    
+                    // Get direction between first two cells to establish the line direction
+                    const initialDirection = selectedCells.length > 1 ? 
+                        getDirection(selectedCells[0], selectedCells[1]) : null;
+                    
+                    if (selectedCells.length === 1 || newDirection === initialDirection) {
+                        selectedCells.push(cell);
+                        cell.classList.add('selected');
+                    }
+                }
+            }
+        }
+
+        // Get direction from cell1 to cell2
+        function getDirection(cell1, cell2) {
+            const row1 = parseInt(cell1.dataset.row);
+            const col1 = parseInt(cell1.dataset.col);
+            const row2 = parseInt(cell2.dataset.row);
+            const col2 = parseInt(cell2.dataset.col);
+            
+            const dRow = row2 - row1;
+            const dCol = col2 - col1;
+            
+            // Normalize direction (1, 0, or -1 for each component)
+            const dirRow = dRow === 0 ? 0 : dRow / Math.abs(dRow);
+            const dirCol = dCol === 0 ? 0 : dCol / Math.abs(dCol);
+            
+            return `${dirRow},${dirCol}`;
+        }
+
+        // Handle mouse up event
+        function handleMouseUp() {
+            if (!isMouseDown) return;
+            isMouseDown = false;
+            
+            if (selectedCells.length > 1) {
+                checkWord();
+            } else {
+                // Single cell clicked - deselect it
+                selectedCells.forEach(cell => cell.classList.remove('selected'));
+                selectedCells = [];
+            }
+        }
+
+        // Add mouseup event to document to handle cases where mouse is released outside a cell
+        document.addEventListener('mouseup', handleMouseUp);
+        document.addEventListener('touchend', () => {
+            if (isMouseDown) {
+                handleMouseUp();
+                isMouseDown = false;
+            }
+        }, { passive: false });
+
+        // Check if the selected word is correct
+        function checkWord() {
+            // Get the selected word in both directions
+            const selectedWordForward = selectedCells.map(cell => cell.textContent).join('');
+            const selectedWordBackward = [...selectedCells].reverse().map(cell => cell.textContent).join('');
+            
+            // Check both directions against our word list
+            let foundWordObj = null;
+            let foundDirection = 'forward';
+            
+            for (const wordObj of words) {
+                if (wordObj.word === selectedWordForward) {
+                    foundWordObj = wordObj;
+                    foundDirection = 'forward';
+                    break;
+                } else if (wordObj.word === selectedWordBackward) {
+                    foundWordObj = wordObj;
+                    foundDirection = 'backward';
+                    break;
+                }
+            }
+            
+            if (foundWordObj && !foundWords.some(w => w.word === foundWordObj.word)) {
+                message.textContent = `Found: ${foundWordObj.word}!`;
+                message.style.color = '#86B817';
+                
+                // Highlight the cells with the word's color
+                const color = wordColors[foundWordObj.word];
+                const cellsToHighlight = foundDirection === 'forward' ? selectedCells : [...selectedCells].reverse();
+                
+                cellsToHighlight.forEach(cell => {
+                    cell.classList.add('found');
+                    cell.style.backgroundColor = color;
+                });
+                
+                foundWords.push(foundWordObj);
+                updateWordsList();
+                updateFoundCount();
+                
+                // Show description for the found word
+                showWordDescription(foundWordObj);
+                
+                // Vibrate on success if supported
+                if (navigator.vibrate) navigator.vibrate(50);
+                
+                if (foundWords.length === words.length) {
+                    showCompletionModal();
+                }
+            } else {
+                message.textContent = `"${selectedWordForward}" not found or already found.`;
+                message.style.color = '#f44336';
+                
+                // Vibrate on error if supported
+                if (navigator.vibrate) navigator.vibrate(200);
+            }
+            
+            selectedCells.forEach(cell => cell.classList.remove('selected'));
+            selectedCells = [];
+        }
+
+        // Show description for a word
+        function showWordDescription(wordObj) {
+            descriptionTitle.textContent = wordObj.word;
+            descriptionContent.textContent = wordObj.description;
+            wordDescription.style.display = 'block';
+            
+            // Scroll to the description if on mobile
+            if (window.innerWidth <= 768) {
+                wordDescription.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Update the words list with the same color as the grid cells
+        function updateWordsList() {
+            wordsList.innerHTML = words.map(wordObj => {
+                const isFound = foundWords.some(w => w.word === wordObj.word);
+                if (isFound) {
+                    const color = wordColors[wordObj.word];
+                    return `<li class="found" style="border-left: 4px solid ${color};" onclick="showWordDescription(${JSON.stringify(wordObj).replace(/"/g, '&quot;')})">${wordObj.word}</li>`;
+                } else {
+                    return `<li>${wordObj.word}</li>`;
+                }
+            }).join('');
+        }
+
+        // Update the found words count
+        function updateFoundCount() {
+            foundCountElement.textContent = foundWords.length;
+        }
+
+        // Show completion modal
+        function showCompletionModal() {
+            document.getElementById('foundCountModal').textContent = foundWords.length;
+            document.getElementById('totalWordsModal').textContent = words.length;
+            
+            // Calculate time taken
+            const timeTaken = Math.floor((new Date() - startTime) / 1000);
+            document.getElementById('completionTime').textContent = timeTaken;
+            
+            completionModal.style.display = 'flex';
+        }
+
+        // Restart the game
+        function restartGame() {
+            // Hide modals
+            completionModal.style.display = 'none';
+            
+            // Clear the grid
+            grid.innerHTML = '';
+
+            // Reset the found words and colors
+            foundWords = [];
+            foundCountElement.textContent = '0';
+
+            // Hide word description
+            wordDescription.style.display = 'none';
+
+            // Reset hints
+            hintsLeft = 3;
+            updateHintButton();
+
+            // Regenerate the grid and update the words list
+            generateGrid();
+            updateWordsList();
+
+            // Reset the message
+            message.textContent = '';
+            message.style.color = '#333';
+            
+            // Reset timer
+            startTime = new Date();
+        }
+
+        // Show a hint by highlighting a random unfound word
+        function showHint() {
+            if (hintsLeft <= 0) {
+                message.textContent = "No hints left!";
+                message.style.color = '#f44336';
+                return;
+            }
+            
+            // Get all words that haven't been found yet
+            const unfoundWords = words.filter(wordObj => 
+                !foundWords.some(w => w.word === wordObj.word)
+            );
+            
+            if (unfoundWords.length === 0) {
+                message.textContent = "All words have been found!";
+                return;
+            }
+            
+            // Choose a random unfound word
+            const randomIndex = Math.floor(Math.random() * unfoundWords.length);
+            const wordToHint = unfoundWords[randomIndex];
+            const wordPos = wordPositions[wordToHint.word];
+            
+            // Flash the first letter of the word
+            const firstCellIndex = wordPos.cellIndices[0];
+            const firstCell = grid.children[firstCellIndex];
+            
+            // Animate the hint
+            firstCell.style.transition = 'all 0.5s';
+            firstCell.style.backgroundColor = '#FFC107';
+            firstCell.style.transform = 'scale(1.2)';
+            
+            // Reset after animation
+            setTimeout(() => {
+                firstCell.style.backgroundColor = '';
+                firstCell.style.transform = '';
+                setTimeout(() => {
+                    firstCell.style.backgroundColor = '#FFC107';
+                    firstCell.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        firstCell.style.backgroundColor = '';
+                        firstCell.style.transform = '';
+                    }, 500);
+                }, 300);
+            }, 500);
+            
+            message.textContent = `Hint: The word ${wordToHint.word} starts here!`;
+            message.style.color = '#FFC107';
+            
+            hintsLeft--;
+            updateHintButton();
+        }
+
+        // Update the hint button text
+        function updateHintButton() {
+            hintButton.textContent = `Get Hint (${hintsLeft} left)`;
+            hintButton.disabled = hintsLeft <= 0;
+        }
+
+        // Exit the game
+        function exitGame() {
+            if (confirm('Are you sure you want to exit the game? Your progress will be lost.')) {
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Add keyboard support for accessibility
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                // Clear selection when ESC is pressed
+                selectedCells.forEach(cell => cell.classList.remove('selected'));
+                selectedCells = [];
+                isMouseDown = false;
+            }
+        });
+
+        // Add a cheat mode for testing (hold Shift+C)
+        let cheatKeys = [];
+        document.addEventListener('keydown', function(e) {
+            cheatKeys.push(e.key);
+            if (cheatKeys.length > 3) cheatKeys.shift();
+            
+            if (cheatKeys.join('') === 'ShiftcC') {
+                // Reveal all words
+                words.forEach(wordObj => {
+                    if (!foundWords.some(w => w.word === wordObj.word)) {
+                        const wordPos = wordPositions[wordObj.word];
+                        const cells = wordPos.cellIndices.map(index => grid.children[index]);
+                        
+                        cells.forEach(cell => {
+                            cell.classList.add('found');
+                            cell.style.backgroundColor = wordColors[wordObj.word];
+                        });
+                        
+                        foundWords.push(wordObj);
+                    }
+                });
+                
+                updateWordsList();
+                updateFoundCount();
+                
+                if (foundWords.length === words.length) {
+                    showCompletionModal();
+                }
+                
+                cheatKeys = []; // Reset
+            }
+        });
+    </script>
+
+    <!-- Add these scripts for additional functionality -->
+    <script src="lib/jquery/jquery.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+</html>
